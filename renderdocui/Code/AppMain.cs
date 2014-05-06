@@ -42,9 +42,12 @@ namespace renderdocui.Code
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
-            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
-            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+            if (!Helpers.UsingMono)
+            {
+                Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
+                AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
+                Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+            }
 
             // command line arguments that we can call when we temporarily elevate the process
             if(args.Contains("--registerRDCext"))

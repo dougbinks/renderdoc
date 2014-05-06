@@ -74,6 +74,9 @@ namespace renderdocui.Code
             else return val;
         }
 
+        private static bool MonoTypePresent = (Type.GetType("Mono.Runtime") != null);
+        public static bool UsingMono { get { return MonoTypePresent; } }
+
         public static bool IsElevated
         {
             get
